@@ -1,13 +1,10 @@
 var Student = require('./student')
 
-// Express 提供了一种更好的方式
-// 专门用来包装路由的
 var express = require('express')
 
-// 1. 创建一个路由容器
+//  创建一个路由容器
 var router = express.Router()
 
-// 2. 把路由都挂载到 router 路由容器中
 
 /*
  * 渲染学生列表页面
@@ -17,14 +14,6 @@ router.get('/students', function (req, res) {
     if (err) {
       return res.status(500).send('Server error.')
     }
-    res.render('index.html', {
-      fruits: [
-        '苹果',
-        '香蕉',
-        '橘子'
-      ],
-      students: students
-    })
   })
 })
 
@@ -39,10 +28,7 @@ router.get('/students/new', function (req, res) {
  * 处理添加学生
  */
 router.post('/students/new', function (req, res) {
-  // 1. 获取表单数据
-  // 2. 处理
-  //    将数据保存到 db.json 文件中用以持久化
-  // 3. 发送响应
+
   new Student(req.body).save(function (err) {
     if (err) {
       return res.status(500).send('Server error.')
@@ -96,6 +82,6 @@ router.get('/students/delete', function (req, res) {
   })
 })
 
-// 3. 把 router 导出
+//  把 router 导出
 module.exports = router
 
